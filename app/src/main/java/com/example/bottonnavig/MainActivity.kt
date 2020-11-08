@@ -1,38 +1,38 @@
 package com.example.bottonnavig
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import com.example.bottonnavig.fragments.FavoriteFragment
-import com.example.bottonnavig.fragments.HomeFragment
-import com.example.bottonnavig.fragments.SettingsFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import android.view.Window
+import android.view.WindowManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 
 class MainActivity : AppCompatActivity() {
 
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_main)
+        getSupportActionBar()?.hide()
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        val HomeFragment = HomeFragment()
-        val favoriteFragment = FavoriteFragment()
-        val SettingsFragment = SettingsFragment()
+        val navController = findNavController(R.id.nav_host_fragment)
 
-        makeCurrentFragment(HomeFragment)
+        val appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.navigation_home, R.id.navigation_SelectCity))
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
-       bottom_navigation.setOnNavigationItemSelectedListener {
-           when (it.itemId){
-               R.id.ic_home -> makeCurrentFragment(HomeFragment)
-               R.id.ic_favorite -> makeCurrentFragment(favoriteFragment)
-               R.id.ic_settings -> makeCurrentFragment(SettingsFragment)
-           }
-           true
-       }
+
     }
-
-    private fun makeCurrentFragment(fragment: Fragment) =
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_wrapper, fragment)
-            commit()
-        }
 }

@@ -1,7 +1,5 @@
-package com.example.bottonnavig.fragments
+package com.example.bottonnavig.ui
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,15 +8,15 @@ import android.view.ViewGroup
 
 import com.example.bottonnavig.R
 
-class HomeFragment : Fragment() {
 
+class SettingsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_home, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_settings, container, false)
         return rootView
     }
 }
