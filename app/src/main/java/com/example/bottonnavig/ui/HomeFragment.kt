@@ -110,7 +110,7 @@ class HomeFragment : Fragment() {
                         when(weather) {
                             "Thunderstorm" -> {
                                 Glide.with(this@HomeFragment).load(R.drawable.thunder).into(imageView1)
-                                SendNotify("Оставайтесь дома и ничего не бойтесь!", R.drawable.thunder)
+                                SendNotify("Если жизнь дорога, оставайтесь дома", R.drawable.thunder)
                             }
                             "Drizzle" -> {
                                 Glide.with(this@HomeFragment).load(R.drawable.rainy).into(imageView1)
